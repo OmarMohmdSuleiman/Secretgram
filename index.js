@@ -10,11 +10,18 @@ const saltRounds = 10;
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
-const db = new pg.Client({
-    user: process.env.PG_USER,
-    host: process.env.PG_HOST,
-    database: process.env.PG_DATABASE,
-    password: process.env.PG_PASSWORD,
-    port: process.env.PG_PORT,
+// const db = new pg.Client({
+//     user: process.env.PG_USER,
+//     host: process.env.PG_HOST,
+//     database: process.env.PG_DATABASE,
+//     password: process.env.PG_PASSWORD,
+//     port: process.env.PG_PORT,
+//   });
+//   db.connect();
+app.get("/", (req, res) => {
+    res.render("index.ejs");
   });
-  db.connect();
+
+app.listen(port, () => {
+    console.log(`Server running on port ${port}`);
+});
