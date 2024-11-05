@@ -1,0 +1,25 @@
+<%- include('partials/header') %>
+<div class="container">
+    <h1>Make an Account</h1>
+    <h2>Register</h2>
+  
+    
+          <div class="register-form">
+  
+            <!-- Makes POST request to /register route -->
+            <form action="/register" method="POST">
+              <div class="fill-that">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" name="username">
+              </div>
+              <div class="fill-that">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" name="password">
+              </div>
+              <button type="submit" class="register-btn">Register</button>
+            </form>
+  
+          </div>
+        </div>
+      
+      
