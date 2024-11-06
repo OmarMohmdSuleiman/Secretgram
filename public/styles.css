@@ -1,3 +1,18 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Center the .container div using Flexbox */
+html, body {
+    height: 100%; /* Ensure the body takes up full height */
+    display: flex; /* Use Flexbox for centering */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    font-family: Arial, sans-serif; /* Basic font */
+}
+
 .bg {
     animation:slide 3s ease-in-out infinite alternate;
     background-image: linear-gradient(-60deg, rgb(85, 255, 0) 50%, rgb(0, 0, 0) 50%);
@@ -27,4 +42,65 @@
       transform:translateX(25%);
     }
   }
+
+  .container {
+    text-align: center; /* Center text inside the container */
+    background-color: #f4f4f4;
+    opacity: 0.8; /* Light background for the container */
+    
+    padding: 20px; /* Some padding for breathing space */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    width: 100%;
+    max-width: 600px; /* Limit max width for better responsiveness */
+    margin: 10px; /* Margin for spacing */
+}
+.container:hover{
+    opacity:1;
+}
+
+/* Header styles */
+h1 {
+    margin-bottom: 30px;
+    font-size: 3rem; /* Bigger font for main heading */
+    color: #333; /* Dark color for the text */
+}
+
+h1 span {
+    font-size: 4rem;
+    font-family: 'Pacifico', cursive;
+    color: rgb(92, 92, 92);
+    font-weight: bolder; /* Accent color for the span */
+}
+
+/* Subheading styles */
+h3 {
+    font-family: 'Lobster', cursive;
+    font-size: 1.5rem; /* Slightly smaller font for subheading */
+    color: #666; /* Lighter color for subheading */
+    margin-bottom: 20px; /* Add some space below */
+}
+
+/* Button container styles */
+.theform {
+    display: flex; /* Use Flexbox to align buttons horizontally */
+    justify-content: center; /* Center the buttons horizontally */
+    gap: 20px; /* Add some space between buttons */
+}
+
+/* Button styles */
+.theform a {
+    padding: 10px 20px; /* Padding for the buttons */
+    background-color: #666; /* Button color */
+    color: white; /* Button text color */
+    text-decoration: none; /* Remove underline from links */
+    border-radius: 4px; /* Rounded corners for the buttons */
+    font-size: 1.1rem; /* Slightly larger font size for the buttons */
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+/* Hover effect for buttons */
+.theform a:hover {
+    background-color: rgb(85, 255, 0); /* Darker blue on hover */
+}
   
