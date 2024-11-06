@@ -61,13 +61,13 @@ html, body {
 
 /* Header styles */
 h1 {
-    margin-bottom: 30px;
+    margin-bottom: 50px;
     font-size: 3rem; /* Bigger font for main heading */
     color: #333; /* Dark color for the text */
 }
 
 h1 span {
-    font-size: 4rem;
+    font-size: 4.5rem;
     font-family: 'Pacifico', cursive;
     color: rgb(92, 92, 92);
     font-weight: bolder; /* Accent color for the span */
@@ -75,6 +75,7 @@ h1 span {
 
 /* Subheading styles */
 h3 {
+    margin-top: 30px;
     font-family: 'Lobster', cursive;
     font-size: 1.5rem; /* Slightly smaller font for subheading */
     color: #666; /* Lighter color for subheading */
@@ -104,3 +105,91 @@ h3 {
     background-color: rgb(85, 255, 0); /* Darker blue on hover */
 }
   
+
+.container-2 {
+    background-color: rgba(255, 255, 255, 0.9); /* Slightly opaque white background */
+    opacity:0.8;
+    width: 100%;
+    max-width: 450px; /* Max width of the form container */
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+    text-align: center;
+}
+.container-2:hover{
+    opacity:1
+}
+
+/* Headings Styling */
+#account {
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+h2 {
+    font-size: 1.5rem;
+    font-weight: bolder;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+/* General Form Styling */
+.general-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Spacing between the form fields */
+}
+
+/* Styling for input fields and labels */
+.fill-that {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.fill-that label {
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 5px;
+    text-align: left;
+}
+
+.form-control {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    transition: border-color 0.3s ease-in-out;
+}
+
+.form-control:focus {
+    border-color: #3498db; /* Highlight input fields with a blue border on focus */
+    outline: none;
+}
+
+/* Button Styling */
+.the-btn {
+    margin-top: 20px;
+    background-color: #666; /* Blue background for the register button */
+    color: white;
+    padding: 12px;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.the-btn:hover {
+    background-color: rgb(85, 255, 0); /* Darker blue when hovering */
+}
+
+.the-btn:active {
+    background-color: #3e3e3e; /* Even darker grey when the button is clicked */
+}
+label{
+    font-family: 'Pacifico', cursive;
+}
