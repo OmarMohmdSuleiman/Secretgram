@@ -215,3 +215,24 @@ label{
 #before-secret{
     font-family: 'Courier New', Courier, monospace;
 }
+
+.logout-btn{
+    border: 1px black solid;
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 30px;
+    border-color: #3e3e3e;
+    background-color:rgb(85, 255, 0);
+    color: black;
+    font-weight: bold;
+    font-family: 'Pacifico', cursive;
+    transition:  0.3s;
+}
+
+.logout-btn:hover{
+    text-decoration: none;
+    background-color: orange;
+    color: black;
+    
+    border-radius: 0px;
+}
