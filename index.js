@@ -41,13 +41,51 @@ app.get("/login", (req, res) => {
     
     res.render("login.ejs");  
 });
-app.get("/secrets", (req, res) => {
+app.get("/secrets", async (req, res) => {
+  console.log("User Email in session (before rendering):", req.session.userEmail);  // Log the session email
   if (req.session.userAuthorized) {
-    res.render("secrets.ejs");
-} else {
+    // Fetch the user's secret from the database using the stored email in the session
+    const result = await db.query("SELECT secrettext FROM user_info WHERE email = $1", [req.session.userEmail]);
+    const userSecret = result.rows[0] ? result.rows[0].secrettext : ''; // Default to empty if no secret
+
+    // Render the secrets page with the user's secret (if any)
+    res.render("secrets.ejs", { secret: userSecret });
+  } else {
     res.redirect("/login");
-}
+  }
 });
+
+app.post("/login", async (req, res) => {
+  const email = req.body.username;
+  const password = req.body.password;
+
+  try {
+    const checkUser = await db.query("SELECT * FROM user_info WHERE email = $1", [email]);
+
+    if (checkUser.rows.length === 0) {
+      return res.redirect("/login");
+    }
+
+    const user = checkUser.rows[0];
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+
+    if (!isPasswordValid) {
+      return res.redirect("/login");
+    }
+
+    // After successful login, set session variables
+    req.session.userAuthorized = true;
+    req.session.userEmail = user.email;  // Store the email in the session
+
+    console.log("Logged in as:", req.session.userEmail);  // Log email to verify it's set
+
+    res.redirect("/secrets");
+  } catch (err) {
+    console.error("Error during login:", err);
+    res.status(500).send("Server error during login.");
+  }
+});
+
 
 
 
