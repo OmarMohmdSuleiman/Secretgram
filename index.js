@@ -8,7 +8,7 @@ import session from "express-session";
 const app = express();
 const port = 4000;
 const saltRounds = 10;
-const userAuthorized=false;
+
 env.config();
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -107,7 +107,10 @@ app.post("/register", async (req, res) => {
       }
   
       // Successful login, redirect to secrets page
-      return res.redirect("/secrets");
+      req.session.userAuthorized = true;
+
+    
+    return res.redirect("/secrets");
     } catch (err) {
       console.error("Error during login:", err);
       return res.status(500).send("Server error during login.");
