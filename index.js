@@ -156,6 +156,17 @@ app.post("/secrets", async (req, res) => {
 });
   
 
+app.get("/logout", (req, res) => {
+  // Destroy the session and all session data
+  req.session.destroy((err) => {
+    if (err) {
+      return res.status(500).send("Error during logout.");
+    }
+    // Redirect to the login page after successful logout
+    res.redirect("/login");
+  });
+});
+
 
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
