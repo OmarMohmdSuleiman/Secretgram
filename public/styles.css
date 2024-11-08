@@ -193,3 +193,16 @@ h2 {
 label{
     font-family: 'Pacifico', cursive;
 }
+
+.container-3{
+    background-color: #f9f9f9;
+    padding: 40px;
+    border-radius: 4px;
+    text-align: center;
+    opacity: 0.8;
+    transition: border-color 0.3s ease-in-out;
+
+}
+.container-3:hover{
+    opacity: 1;
+}
