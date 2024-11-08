@@ -1,10 +1,11 @@
+/* Universal selector: Remove margin and padding, set box-sizing to border-box for all elements */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Center the .container div using Flexbox */
+
 html, body {
     height: 100%; /* Ensure the body takes up full height */
     display: flex; /* Use Flexbox for centering */
@@ -12,7 +13,7 @@ html, body {
     align-items: center; /* Center vertically */
     font-family: Arial, sans-serif; /* Basic font */
 }
-
+/* Background animation: Gradient background with fixed position and sliding animation */   
 .bg {
     animation:slide 3s ease-in-out infinite alternate;
     background-image: linear-gradient(-60deg, rgb(85, 255, 0) 50%, rgb(0, 0, 0) 50%);
@@ -24,16 +25,16 @@ html, body {
     top:0;
     z-index:-1;
   }
-  
+  /* Animation variations */
   .bg2 {
     animation-direction:alternate-reverse;
     animation-duration:4s;
   }
-  
+  /* Even slower animation for bg3 */
   .bg3 {
     animation-duration:5s;
   }
-
+/* Keyframes for sliding animation */
   @keyframes slide {
     0% {
       transform:translateX(-25%);
@@ -55,6 +56,7 @@ html, body {
     max-width: 600px; /* Limit max width for better responsiveness */
     margin: 10px; /* Margin for spacing */
 }
+/* Full opacity on hover */
 .container:hover{
     opacity:1;
 }
@@ -65,7 +67,7 @@ h1 {
     font-size: 3rem; /* Bigger font for main heading */
     color: #333; /* Dark color for the text */
 }
-
+/* Styling for the span inside h1  */
 h1 span {
     font-size: 4.5rem;
     font-family: 'Pacifico', cursive;
@@ -116,11 +118,12 @@ h3 {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
     text-align: center;
 }
+/* Full opacity on hover */
 .container-2:hover{
     opacity:1
 }
 
-/* Headings Styling */
+
 #account {
     font-size: 2.5rem;
     color: #333;
@@ -134,10 +137,10 @@ h2 {
     margin-bottom: 20px;
 }
 
-/* General Form Styling */
+
 .general-form {
     display: flex;
-    flex-direction: column;
+    flex-direction: column;/* Stack form fields vertically */
     gap: 20px; /* Spacing between the form fields */
 }
 
@@ -156,7 +159,7 @@ h2 {
 }
 
 .form-control {
-    width: 100%;
+    width: 100%; /* Full width for the input fields */
     padding: 12px;
     font-size: 1rem;
     border: 1px solid #ccc;
@@ -164,13 +167,13 @@ h2 {
     background-color: #f9f9f9;
     transition: border-color 0.3s ease-in-out;
 }
-
+/* Focus state for inputs */
 .form-control:focus {
     border-color: #3498db; /* Highlight input fields with a blue border on focus */
     outline: none;
 }
 
-/* Button Styling */
+/* Button styling for submission for the login and register */
 .the-btn {
     margin-top: 20px;
     background-color: #666; /* Blue background for the register button */
@@ -182,11 +185,11 @@ h2 {
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
-
+/* Hover effect for the button */
 .the-btn:hover {
     background-color: rgb(85, 255, 0); /* Darker blue when hovering */
 }
-
+/* Active state for the button when clicked */
 .the-btn:active {
     background-color: #3e3e3e; /* Even darker grey when the button is clicked */
 }
@@ -206,16 +209,17 @@ label{
 .container-3:hover{
     opacity: 1;
 }
+/* Styling for secret text */
 .my-secret{
     
     font-weight: bolder;
     font-family: cursive;
 }
-
+/* Styling for secret prompt */
 #before-secret{
     font-family: 'Courier New', Courier, monospace;
 }
-
+/* Logout button styling */
 .logout-btn{
     border: 1px black solid;
     text-decoration: none;
@@ -226,9 +230,9 @@ label{
     color: black;
     font-weight: bold;
     font-family: 'Pacifico', cursive;
-    transition:  0.3s;
+    transition:  0.3s; /* Smooth transition for hover effect */
 }
-
+/* Hover effect for logout button */
 .logout-btn:hover{
     text-decoration: none;
     background-color: orange;
