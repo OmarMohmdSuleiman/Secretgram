@@ -7,6 +7,7 @@ import env from "dotenv";
 const app = express();
 const port = 4000;
 const saltRounds = 10;
+const userAuthorized=false;
 env.config();
 
 app.use(bodyParser.urlencoded({ extended: true }));
