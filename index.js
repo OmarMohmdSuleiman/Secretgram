@@ -132,6 +132,28 @@ app.post("/register", async (req, res) => {
   }
 });
 
+app.post("/secrets", async (req, res) => {
+  const userSecret = req.body.secret;
+
+  if (req.session.userAuthorized) {
+    try {
+      // Update the secret in the database for the logged-in user
+      await db.query(
+        `UPDATE user_info SET secrettext = $1 WHERE email = $2`,
+        [userSecret, req.session.userEmail]  // Use session email
+      );
+      
+      console.log("Secret updated successfully");
+      res.redirect("/secrets");  // Redirect to secrets page after updating
+    } catch (err) {
+      console.log("Error updating secret:", err);
+      res.status(500).send("Error updating secret.");
+    }
+  } else {
+    // If not authorized, redirect to login
+    res.redirect("/login");
+  }
+});
   
 
 
