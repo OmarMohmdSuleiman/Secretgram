@@ -60,29 +60,35 @@ app.post("/login", async (req, res) => {
   const password = req.body.password;
 
   try {
+    // Check if the user exists in the database
     const checkUser = await db.query("SELECT * FROM user_info WHERE email = $1", [email]);
 
     if (checkUser.rows.length === 0) {
-      return res.redirect("/login");
+      // User does not exist, redirect with an error message
+      return res.redirect("/login?message=User%20does%20not%20exist");
     }
 
     const user = checkUser.rows[0];
+
+    // Compare the hashed password
     const isPasswordValid = await bcrypt.compare(password, user.password);
 
     if (!isPasswordValid) {
-      return res.redirect("/login");
+      // Incorrect password, redirect with an error message
+      return res.redirect("/login?message=Incorrect%20password");
     }
 
-    // After successful login, set session variables
+    // Successful login, set session variables
     req.session.userAuthorized = true;
-    req.session.userEmail = user.email;  // Store the email in the session
+    req.session.userEmail = user.email;  // Store the user's email in the session
 
     console.log("Logged in as:", req.session.userEmail);  // Log email to verify it's set
 
+    // Redirect to the secrets page after successful login
     res.redirect("/secrets");
   } catch (err) {
     console.error("Error during login:", err);
-    res.status(500).send("Server error during login.");
+    return res.status(500).send("Server error during login.");
   }
 });
 
@@ -90,70 +96,42 @@ app.post("/login", async (req, res) => {
 
 
 app.post("/register", async (req, res) => {
-    const email = req.body.username;
-    const password = req.body.password;
-  
-    try {
-      // Check if user already exists
-      const checkResult = await db.query("SELECT * FROM user_info WHERE email = $1", [email]);
-  
-      if (checkResult.rows.length > 0) {
-        // User already exists, redirect to login page with message
-        return res.redirect("/login");
-      } else {
-        // Hash the password
-        const hash = await bcrypt.hash(password, saltRounds);
-  
-        // Insert user into the database
-        const result = await db.query(
-          "INSERT INTO user_info (email, password) VALUES ($1, $2) RETURNING *",
-          [email, hash]
-        );
-  
-        const user = result.rows[0]; // Get the inserted user details
-        console.log(user);
-  
-        // Redirect to secrets page after successful registration
-        return res.redirect("/secrets");
-      }
-    } catch (err) {
-      console.log(err);
-      return res.status(500).send("Error checking user in the database.");
-    }
-  });
-  app.post("/login", async (req, res) => {
-    const email = req.body.username;
-    const password = req.body.password;
-  
-    try {
-      // Check if the user exists in the database
-      const checkUser = await db.query("SELECT * FROM user_info WHERE email = $1", [email]);
-  
-      if (checkUser.rows.length === 0) {
-        // User does not exist, redirect with an error message
-        return res.redirect("/login?message=User%20does%20not%20exist");
-      }
-  
-      const user = checkUser.rows[0];
-  
-      // Compare the hashed password
-      const isPasswordValid = await bcrypt.compare(password, user.password);
-  
-      if (!isPasswordValid) {
-        // Incorrect password, redirect with an error message
-        return res.redirect("/login?message=Incorrect%20password");
-      }
-  
-      // Successful login, redirect to secrets page
-      req.session.userAuthorized = true;
+  const email = req.body.username;
+  const password = req.body.password;
 
-    
-    return res.redirect("/secrets");
-    } catch (err) {
-      console.error("Error during login:", err);
-      return res.status(500).send("Server error during login.");
+  try {
+    // Check if the user already exists
+    const checkResult = await db.query("SELECT * FROM user_info WHERE email = $1", [email]);
+
+    if (checkResult.rows.length > 0) {
+      // User already exists, redirect to login page with message
+      return res.redirect("/login?message=User%20already%20exists");
+    } else {
+      // Hash the password
+      const hash = await bcrypt.hash(password, saltRounds);
+
+      // Insert user into the database
+      const result = await db.query(
+        "INSERT INTO user_info (email, password) VALUES ($1, $2) RETURNING *",
+        [email, hash]
+      );
+
+      const user = result.rows[0]; // Get the inserted user details
+      console.log("User registered:", user);
+
+      // Set session variables
+      req.session.userAuthorized = true;
+      req.session.userEmail = email;  // Store email in the session for authentication
+
+      // Redirect to secrets page after successful registration
+      return res.redirect("/secrets");
     }
-  });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).send("Error during registration.");
+  }
+});
+
   
 
 
