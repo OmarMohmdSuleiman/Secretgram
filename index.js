@@ -1,3 +1,4 @@
+// Import required modules
 import express from "express";
 import bodyParser from "body-parser";
 import pg from "pg";
@@ -5,22 +6,24 @@ import bcrypt from "bcrypt";
 import env from "dotenv";
 import session from "express-session";
 
-const app = express();
-const port = 4000;
-const saltRounds = 10;
+const app = express(); //Initialize the express app
+const port = 4000; // Port of the server
+const saltRounds = 10; // Number of salt rounds
 
-env.config();
+env.config(); // Load the variables from .env
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(express.static("public"));
+app.use(express.static("public")); // Look inside the public folder
 
+// Set the session
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true,
 }));
 
+// Connect to PostgreSQL database 
 const db = new pg.Client({
     user: process.env.PG_USER,
     host: process.env.PG_HOST,
@@ -30,6 +33,7 @@ const db = new pg.Client({
   });
   db.connect();
 
+ // Route for the pages in the app through GET
 app.get("/", (req, res) => {
     res.render("index.ejs");
   });
@@ -41,6 +45,7 @@ app.get("/login", (req, res) => {
     
     res.render("login.ejs");  
 });
+
 app.get("/secrets", async (req, res) => {
   console.log("User Email in session (before rendering):", req.session.userEmail);  // Log the session email
   if (req.session.userAuthorized) {
@@ -48,13 +53,14 @@ app.get("/secrets", async (req, res) => {
     const result = await db.query("SELECT secrettext FROM user_info WHERE email = $1", [req.session.userEmail]);
     const userSecret = result.rows[0] ? result.rows[0].secrettext : ''; // Default to empty if no secret
 
-    // Render the secrets page with the user's secret (if any)
+    // Render the secrets page with the user's secret if there is secret
     res.render("secrets.ejs", { secret: userSecret });
   } else {
     res.redirect("/login");
   }
 });
 
+ // Route for the pages in the app through POST
 app.post("/login", async (req, res) => {
   const email = req.body.username;
   const password = req.body.password;
@@ -167,7 +173,7 @@ app.get("/logout", (req, res) => {
   });
 });
 
-
+// Start the Express server on port 4000
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
 });
