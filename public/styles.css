@@ -196,7 +196,7 @@ label{
 
 .container-3{
     background-color: #f9f9f9;
-    padding: 40px;
+    padding: 45px;
     border-radius: 4px;
     text-align: center;
     opacity: 0.8;
@@ -205,4 +205,13 @@ label{
 }
 .container-3:hover{
     opacity: 1;
+}
+.my-secret{
+    
+    font-weight: bolder;
+    font-family: cursive;
+}
+
+#before-secret{
+    font-family: 'Courier New', Courier, monospace;
 }
