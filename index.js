@@ -3,6 +3,7 @@ import bodyParser from "body-parser";
 import pg from "pg";
 import bcrypt from "bcrypt";
 import env from "dotenv";
+import session from "express-session";
 
 const app = express();
 const port = 4000;
@@ -11,7 +12,14 @@ const userAuthorized=false;
 env.config();
 
 app.use(bodyParser.urlencoded({ extended: true }));
+
 app.use(express.static("public"));
+
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: true,
+}));
 
 const db = new pg.Client({
     user: process.env.PG_USER,
