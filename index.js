@@ -42,7 +42,11 @@ app.get("/login", (req, res) => {
     res.render("login.ejs");  
 });
 app.get("/secrets", (req, res) => {
+  if (req.session.userAuthorized) {
     res.render("secrets.ejs");
+} else {
+    res.redirect("/login");
+}
 });
 
 
